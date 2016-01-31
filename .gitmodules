@@ -1,0 +1,12 @@
+[submodule "wiki-markup"]
+	path = wiki-markup
+	url = git@github.com:5cript/wiki-markup.git
+[submodule "wiki-client"]
+	path = wiki-client
+	url = git@github.com:5cript/wiki-client.git
+[submodule "SimpleJSON"]
+	path = SimpleJSON
+	url = git@github.com:5cript/SimpleJSON.git
+[submodule "SimpleUtil"]
+	path = SimpleUtil
+	url = git@github.com:5cript/SimpleUtil.git
