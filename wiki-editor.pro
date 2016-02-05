@@ -6,6 +6,12 @@
 
 QT       += core gui
 QMAKE_CXXFLAGS += -std=c++14
+CONFIG += object_parallel_to_source
+LIBS += -lboost_system-mt -lws2_32 -lssl -lcrypto
+
+release {
+    CONFIG += static staticlib
+}
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -201,3 +207,6 @@ HEADERS  += editor.h \
     SimpleUtil/value_ptr/value_ptr.hpp
 
 FORMS    += editor.ui
+
+RESOURCES += \
+    resources.qrc
