@@ -42,4 +42,14 @@ void PageBuilder::addLabel(QLayout *parent, std::string const& text)
     label->setText(QString::fromStdString(text));
     parent->addWidget(label);
 }
+//-----------------------------------------------------------------------------------
+void PageBuilder::addTextSection(QLayout *parent, WikiMarkup::Components::IComponent *component)
+{
+
+}
+//-----------------------------------------------------------------------------------
+void PageBuilder::addHeader(QLayout *parent, WikiMarkup::Components::Header *component)
+{
+
+}
 //####################################################################################

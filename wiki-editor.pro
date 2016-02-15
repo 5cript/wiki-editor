@@ -45,7 +45,9 @@ SOURCES += main.cpp\
     ../SimpleJSON/utility/base64.cpp \
     ../SimpleJSON/utility/beauty_stream.cpp \
     ../SimpleJSON/utility/xml_converter.cpp \
-    ../SimpleJSON/test.cpp
+    ../SimpleJSON/test.cpp \
+    ui_components/text_section.cpp \
+    ui_components/header.cpp
 
 HEADERS  += editor.h \
     component_builder.h \
@@ -185,7 +187,9 @@ HEADERS  += editor.h \
     ../wiki-markup/util/meta/apply.hpp \
     ../wiki-markup/util/meta/pop_front.hpp \
     ../wiki-markup/configuration.hpp \
-    ../wiki-markup/page.hpp
+    ../wiki-markup/page.hpp \
+    ui_components/text_section.h \
+    ui_components/header.h
 
 FORMS    += editor.ui
 
@@ -193,11 +197,6 @@ RESOURCES += \
     resources.qrc
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../wiki-markup/bin/release/ -lwiki-markup
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../wiki-markup/bin/debug/ -lwiki-markup
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../wiki-markup/bin/debug/ -lwiki-markup
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../wiki-markup/bin/release/ -lwiki-markup
 else:unix: LIBS += -L$$PWD/../wiki-markup/bin/ -lwiki-markup
-
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../wiki-markup/bin/release/libwiki-markup.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../wiki-markup/bin/debug/libwiki-markup.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../wiki-markup/bin/release/wiki-markup.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../wiki-markup/bin/debug/wiki-markup.lib
-else:unix: PRE_TARGETDEPS += $$PWD/../wiki-markup/bin/libwiki-markup.a
