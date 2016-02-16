@@ -2,7 +2,7 @@
 #define COMPONENTBUILDER_H
 
 #include "wiki-markup/page.hpp"
-#include "ui_components/text_section.h"
+#include "wiki-markup/components/components.hpp"
 
 #include <QWidget>
 #include <QLabel>
@@ -40,8 +40,8 @@ public:
 
 private:
     void addLabel(QLayout* parent, std::string const& text);
-    void addTextSection(QLayout* parent, WikiMarkup::Components::IComponent* component);
-    void addHeader(QLayout* parent, WikiMarkup::Components::Header* component);
+    void addTextSection(QLayout* parent, WikiMarkup::Components::IComponent const* component);
+    void addHeader(QLayout* parent, WikiMarkup::Components::Header const* component);
 
 private:
     WikiMarkup::Page page_;

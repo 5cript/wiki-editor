@@ -24,7 +24,17 @@ void Editor::on_action_LOAD_triggered()
 {
     qDebug() << "Hello";
 
-    auto fileName = QFileDialog::getOpenFileName(this, "Open a markup file", ".", "Text (*.mu *.txt)");
+    QFileDialog dialog {this};
+    dialog.setFileMode(QFileDialog::ExistingFile);
+    dialog.setViewMode(QFileDialog::List);
+    dialog.setOption(QFileDialog::DontUseCustomDirectoryIcons);
+    dialog.setNameFilter("Text (*.mu *.txt)");
+    dialog.exec();
+    auto files = dialog.selectedFiles();
+    if (files.isEmpty())
+        return;
+
+    auto fileName = files[0];
 
     std::ifstream reader (fileName.toStdString(), std::ios_base::binary);
 
