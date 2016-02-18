@@ -4,6 +4,7 @@
 #include <QStyleOptionFocusRect>
 #include <QPalette>
 #include <QStyle>
+#include <QDebug>
 
 //-----------------------------------------------------------------------------------
 WikiTableModel::WikiTableModel(QObject* parent, const WikiMarkup::Components::Table& table)
@@ -15,7 +16,7 @@ WikiTableModel::WikiTableModel(QObject* parent, const WikiMarkup::Components::Ta
 //-----------------------------------------------------------------------------------
 int WikiTableModel::rowCount(QModelIndex const&) const
 {
-    return table_.rows.size();
+
 }
 //-----------------------------------------------------------------------------------
 int WikiTableModel::columnCount(QModelIndex const&) const
@@ -23,9 +24,16 @@ int WikiTableModel::columnCount(QModelIndex const&) const
     std::size_t max = 0;
     for (auto const& i : table_.rows)
     {
-        if (i.cells.size() > max)
-            max = i.cells.size();
+        std::size_t count = 0;
+        for (auto const& cell : i.cells)
+        {
+            if (!cell.isHeaderCell)
+                count++;
+        }
+        if (count > max)
+            max = count;
     }
+    qDebug() << max;
     return max;
 }
 //-----------------------------------------------------------------------------------
@@ -67,15 +75,7 @@ QVariant WikiTableModel::headerData(int section, Qt::Orientation orientation, in
     {
         if (orientation == Qt::Horizontal)
         {
-            switch(section)
-            {
-                case 0:
-                    return QString("first");
-                case 1:
-                    return QString("second");
-                case 2:
-                    return QString("third");
-            }
+            return QString("H");
         }
     }
     return QVariant();
@@ -83,8 +83,12 @@ QVariant WikiTableModel::headerData(int section, Qt::Orientation orientation, in
 //-----------------------------------------------------------------------------------
 bool WikiTableModel::setData(const QModelIndex & index, const QVariant & value, int role)
 {
+    int row = index.row();
+    int col = index.column();
+
     if (role == Qt::EditRole)
     {
+        table_.rows[row].cells[col].data = value.toString().toStdString();
     }
     return true;
 }
@@ -98,5 +102,4 @@ void WikiTableModel::setTable(WikiMarkup::Components::Table const& table)
 {
     table_ = table;
 }
-
 //-----------------------------------------------------------------------------------
