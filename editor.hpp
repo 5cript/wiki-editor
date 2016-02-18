@@ -1,7 +1,7 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
-#include "component_builder.h"
+#include "component_builder.hpp"
 
 #include <QMainWindow>
 

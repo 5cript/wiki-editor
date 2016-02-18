@@ -11,7 +11,7 @@ CONFIG += static object_parallel_to_source
 INCLUDEPATH += $$PWD/../wiki-markup/bin/Release
 DEPENDPATH += $$PWD/../wiki-markup/bin/Release
 INCLUDEPATH += ../../wiki-project
-LIBS += -lboost_system-mt -lws2_32 -lssl -lcrypto
+LIBS += -lboost_system-mt -lboost_filesystem-mt -lboost_thread-mt -lboost_wave-mt -lws2_32 -lssl -lcrypto
 
 release {
     QMAKE_LFLAGS += -static -static-libgcc -static-libstdc++
@@ -46,11 +46,13 @@ SOURCES += main.cpp\
     ../SimpleJSON/utility/beauty_stream.cpp \
     ../SimpleJSON/utility/xml_converter.cpp \
     ../SimpleJSON/test.cpp \
-    ui_components/text_section.cpp \
-    ui_components/header.cpp
+    ui_components/header.cpp \
+    ui_components/text.cpp \
+    style_sheet_preprocessor.cpp \
+    ui_components/table.cpp \
+    page_container.cpp
 
-HEADERS  += editor.h \
-    component_builder.h \
+HEADERS  += \
     ../wiki-client/rest/client.hpp \
     ../wiki-client/rest/io_service_provider.hpp \
     ../wiki-client/rest/query.hpp \
@@ -188,8 +190,13 @@ HEADERS  += editor.h \
     ../wiki-markup/util/meta/pop_front.hpp \
     ../wiki-markup/configuration.hpp \
     ../wiki-markup/page.hpp \
-    ui_components/text_section.h \
-    ui_components/header.h
+    ui_components/text.hpp \
+    ui_components/header.hpp \
+    editor.hpp \
+    component_builder.hpp \
+    style_sheet_preprocessor.hpp \
+    ui_components/table.hpp \
+    page_container.hpp
 
 FORMS    += editor.ui
 

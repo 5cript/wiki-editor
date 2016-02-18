@@ -1,11 +1,10 @@
-#include "component_builder.h"
+#include "component_builder.hpp"
 
 #include "wiki-markup/parser/page_parser.hpp"
 
-#include "ui_components/text_section.h"
-#include "ui_components/header.h"
-
 #include <QDebug>
+
+#include <sstream>
 
 using namespace WikiMarkup::Components;
 
@@ -23,91 +22,54 @@ void PageBuilder::loadMarkup(std::string const& markup)
     PageParser parser (markup);
     parser.parse();
 
-    page_ = parser.getPage();
+    container_.getPage() = parser.getPage();
 }
 //-----------------------------------------------------------------------------------
 std::string PageBuilder::toMarkup() const
 {
-    return page_.toMarkup();
+    return container_.getPage().toMarkup();
 }
 //-----------------------------------------------------------------------------------
 void PageBuilder::generateUiElements(QLayout *parent)
 {
-    auto& components = page_.getComponents();
+    auto& components = container_.getPage().getComponents();
+    std::stringstream sstr;
+    container_.getPage().dumpComponentNames(sstr);
+    qDebug() << sstr.str().c_str();
 
     for (auto const& i : components)
     {
         auto* component = i.get();
         if (dynamic_cast <Header const*> (component))
             addHeader(parent, static_cast <Header const*> (component));
+        else if (dynamic_cast <Text const*> (component))
+            addText(parent, static_cast <Text const*> (component));
+        else if (dynamic_cast <Table const*> (component))
+            addTable(parent, static_cast <Table const*> (component));
     }
 }
 //-----------------------------------------------------------------------------------
-void PageBuilder::addLabel(QLayout *parent, std::string const& text)
+void PageBuilder::addText(QLayout* parent, WikiMarkup::Components::Text const* component)
 {
-    QLabel* label = new QLabel();
-    label->setText(QString::fromStdString(text));
-    parent->addWidget(label);
+    auto* text = new TextField;
+    text->setPlainText(QString::fromStdString(component->data));
+    text->setObjectName("TextField");
+    parent->addWidget(text);
 }
 //-----------------------------------------------------------------------------------
-void PageBuilder::addTextSection(QLayout*, WikiMarkup::Components::IComponent const*)
+void PageBuilder::addTable(QLayout* parent, WikiMarkup::Components::Table const* component)
 {
-
+    auto* table = new TableView;
+    table->setObjectName("TableView");
+    table->setModel(&container_.createNewTable(*component));
+    parent->addWidget(table);
 }
 //-----------------------------------------------------------------------------------
 void PageBuilder::addHeader(QLayout* parent, WikiMarkup::Components::Header const* component)
 {
-    switch (component->level)
-    {
-        case (1):
-        {
-            auto* label = new Header1;
-            label->setText(QString::fromStdString(component->data));
-            parent->addWidget(label);
-            break;
-        }
-        case (2):
-        {
-            auto* label = new Header2;
-            label->setText(QString::fromStdString(component->data));
-            parent->addWidget(label);
-            break;
-        }
-        case (3):
-        {
-            auto* label = new Header3;
-            label->setText(QString::fromStdString(component->data));
-            parent->addWidget(label);
-            break;
-        }
-        case (4):
-        {
-            auto* label = new Header4;
-            label->setText(QString::fromStdString(component->data));
-            parent->addWidget(label);
-            break;
-        }
-        case (5):
-        {
-            auto* label = new Header5;
-            label->setText(QString::fromStdString(component->data));
-            parent->addWidget(label);
-            break;
-        }
-        case (6):
-        {
-            auto* label = new Header6;
-            label->setText(QString::fromStdString(component->data));
-            parent->addWidget(label);
-            break;
-        }
-        default:
-        {
-            auto* label = new Header1;
-            label->setText(QString::fromStdString(component->data));
-            parent->addWidget(label);
-            break;
-        }
-    }
+    auto* head = new QLineEdit;
+    head->setObjectName(QString::fromStdString(std::string("Header") + std::to_string(component->level)));
+    head->setText(QString::fromStdString(component->data));
+    parent->addWidget(head);
 }
 //####################################################################################

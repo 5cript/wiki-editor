@@ -1,14 +1,14 @@
 #ifndef COMPONENTBUILDER_H
 #define COMPONENTBUILDER_H
 
-#include "wiki-markup/page.hpp"
-#include "wiki-markup/components/components.hpp"
+#include "page_container.hpp"
 
 #include <QWidget>
 #include <QLabel>
 #include <QLayout>
 
 #include <string>
+#include <vector>
 
 class PageBuilder
 {
@@ -38,13 +38,16 @@ public:
     PageBuilder();
     ~PageBuilder() = default;
 
-private:
-    void addLabel(QLayout* parent, std::string const& text);
-    void addTextSection(QLayout* parent, WikiMarkup::Components::IComponent const* component);
-    void addHeader(QLayout* parent, WikiMarkup::Components::Header const* component);
+    PageBuilder(PageBuilder const&) = delete;
+    operator=(PageBuilder const&) = delete;
 
 private:
-    WikiMarkup::Page page_;
+    void addHeader(QLayout* parent, WikiMarkup::Components::Header const* component);
+    void addText(QLayout* parent, WikiMarkup::Components::Text const* component);
+    void addTable(QLayout* parent, WikiMarkup::Components::Table const* component);
+
+private:
+    PageContainer container_;
 };
 
 #endif // COMPONENTBUILDER_H

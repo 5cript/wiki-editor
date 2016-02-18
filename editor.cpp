@@ -1,4 +1,4 @@
-#include "editor.h"
+#include "editor.hpp"
 #include "ui_editor.h"
 
 #include <QDebug>
@@ -22,8 +22,6 @@ Editor::~Editor()
 //-----------------------------------------------------------------------------------
 void Editor::on_action_LOAD_triggered()
 {
-    qDebug() << "Hello";
-
     QFileDialog dialog {this};
     dialog.setFileMode(QFileDialog::ExistingFile);
     dialog.setViewMode(QFileDialog::List);
