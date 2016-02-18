@@ -6,7 +6,6 @@
 
 QT       += core gui
 QMAKE_CXXFLAGS += -std=c++14
-QMAKE_LFLAGS += -static -static-libgcc -static-libstdc++
 CONFIG += static object_parallel_to_source
 
 INCLUDEPATH += $$PWD/../wiki-markup/bin/Release
@@ -15,6 +14,7 @@ INCLUDEPATH += ../../wiki-project
 LIBS += -lboost_system-mt -lws2_32 -lssl -lcrypto
 
 release {
+    QMAKE_LFLAGS += -static -static-libgcc -static-libstdc++
     CONFIG += static staticlib
 }
 

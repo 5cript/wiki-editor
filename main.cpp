@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // extract style sheet
-    //if (!QFile("./stylesheet.qss").exists())
+    if (!QFile("./stylesheet.qss").exists())
         QFile::copy(":/styles/default.qss", "./stylesheet.qss");
 
     QFile File("stylesheet.qss");

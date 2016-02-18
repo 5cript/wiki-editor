@@ -50,40 +50,64 @@ void PageBuilder::addLabel(QLayout *parent, std::string const& text)
     parent->addWidget(label);
 }
 //-----------------------------------------------------------------------------------
-void PageBuilder::addTextSection(QLayout *parent, WikiMarkup::Components::IComponent const* component)
+void PageBuilder::addTextSection(QLayout*, WikiMarkup::Components::IComponent const*)
 {
 
 }
 //-----------------------------------------------------------------------------------
-void PageBuilder::addHeader(QLayout *parent, WikiMarkup::Components::Header const* component)
+void PageBuilder::addHeader(QLayout* parent, WikiMarkup::Components::Header const* component)
 {
-    QLabel* label;
     switch (component->level)
     {
         case (1):
-            label = new Header1;
+        {
+            auto* label = new Header1;
+            label->setText(QString::fromStdString(component->data));
+            parent->addWidget(label);
             break;
+        }
         case (2):
-            label = new Header2;
+        {
+            auto* label = new Header2;
+            label->setText(QString::fromStdString(component->data));
+            parent->addWidget(label);
             break;
+        }
         case (3):
-            label = new Header3;
+        {
+            auto* label = new Header3;
+            label->setText(QString::fromStdString(component->data));
+            parent->addWidget(label);
             break;
+        }
         case (4):
-            label = new Header4;
+        {
+            auto* label = new Header4;
+            label->setText(QString::fromStdString(component->data));
+            parent->addWidget(label);
             break;
+        }
         case (5):
-            label = new Header5;
+        {
+            auto* label = new Header5;
+            label->setText(QString::fromStdString(component->data));
+            parent->addWidget(label);
             break;
+        }
         case (6):
-            label = new Header6;
+        {
+            auto* label = new Header6;
+            label->setText(QString::fromStdString(component->data));
+            parent->addWidget(label);
             break;
+        }
         default:
-            label = new Header1;
+        {
+            auto* label = new Header1;
+            label->setText(QString::fromStdString(component->data));
+            parent->addWidget(label);
             break;
+        }
     }
-
-    label->setText(QString::fromStdString(component->data));
-    parent->addWidget(label);
 }
 //####################################################################################
