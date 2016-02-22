@@ -3,6 +3,7 @@
 #include "wiki-markup/parser/page_parser.hpp"
 
 #include <QDebug>
+#include <QHeaderView>
 
 #include <sstream>
 
@@ -62,6 +63,8 @@ void PageBuilder::addTable(QLayout* parent, WikiMarkup::Components::Table const*
     auto* table = new TableView;
     table->setObjectName("TableView");
     table->setModel(&container_.createNewTable(*component));
+    table->horizontalHeader()->hide();
+    table->verticalHeader()->hide();
     parent->addWidget(table);
 }
 //-----------------------------------------------------------------------------------

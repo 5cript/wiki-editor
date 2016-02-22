@@ -16,25 +16,14 @@ WikiTableModel::WikiTableModel(QObject* parent, const WikiMarkup::Components::Ta
 //-----------------------------------------------------------------------------------
 int WikiTableModel::rowCount(QModelIndex const&) const
 {
-
+    return table_.rows.size();
 }
 //-----------------------------------------------------------------------------------
 int WikiTableModel::columnCount(QModelIndex const&) const
 {
-    std::size_t max = 0;
-    for (auto const& i : table_.rows)
-    {
-        std::size_t count = 0;
-        for (auto const& cell : i.cells)
-        {
-            if (!cell.isHeaderCell)
-                count++;
-        }
-        if (count > max)
-            max = count;
-    }
-    qDebug() << max;
-    return max;
+    if (table_.rows.empty())
+        return 0;
+    return table_.rows.front().cells.size();
 }
 //-----------------------------------------------------------------------------------
 QVariant WikiTableModel::data(QModelIndex const& index, int role) const
@@ -54,7 +43,7 @@ QVariant WikiTableModel::data(QModelIndex const& index, int role) const
         }
         case(Qt::BackgroundRole):
         {
-            return QVariant();
+            return QVariant(QColor(Qt::yellow));
         }
         case(Qt::TextAlignmentRole):
         {
@@ -69,16 +58,9 @@ QVariant WikiTableModel::data(QModelIndex const& index, int role) const
     }
 }
 //-----------------------------------------------------------------------------------
-QVariant WikiTableModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant WikiTableModel::headerData(int, Qt::Orientation, int) const
 {
-    if (role == Qt::DisplayRole)
-    {
-        if (orientation == Qt::Horizontal)
-        {
-            return QString("H");
-        }
-    }
-    return QVariant();
+    return QVariant(); // no header
 }
 //-----------------------------------------------------------------------------------
 bool WikiTableModel::setData(const QModelIndex & index, const QVariant & value, int role)
@@ -93,7 +75,7 @@ bool WikiTableModel::setData(const QModelIndex & index, const QVariant & value, 
     return true;
 }
 //-----------------------------------------------------------------------------------
-Qt::ItemFlags WikiTableModel::flags(const QModelIndex & index) const
+Qt::ItemFlags WikiTableModel::flags(const QModelIndex &) const
 {
     return Qt::ItemIsSelectable |  Qt::ItemIsEditable | Qt::ItemIsEnabled;
 }
