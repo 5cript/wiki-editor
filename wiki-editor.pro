@@ -50,7 +50,8 @@ SOURCES += main.cpp\
     ui_components/text.cpp \
     style_sheet_preprocessor.cpp \
     ui_components/table.cpp \
-    page_container.cpp
+    page_container.cpp \
+    ../twisted-spirit/rules/space.cpp
 
 HEADERS  += \
     ../wiki-client/rest/client.hpp \
@@ -142,23 +143,14 @@ HEADERS  += \
     ../wiki-markup/components/parsers/uri/ipv4.hpp \
     ../wiki-markup/components/parsers/uri/ipv6.hpp \
     ../wiki-markup/components/parsers/uri/scheme.hpp \
-    ../wiki-markup/components/parsers/basic.hpp \
     ../wiki-markup/components/parsers/comments.hpp \
     ../wiki-markup/components/parsers/format.hpp \
-    ../wiki-markup/components/parsers/fusion_includes.hpp \
     ../wiki-markup/components/parsers/header.hpp \
     ../wiki-markup/components/parsers/indents.hpp \
     ../wiki-markup/components/parsers/link.hpp \
     ../wiki-markup/components/parsers/list.hpp \
-    ../wiki-markup/components/parsers/parse.hpp \
-    ../wiki-markup/components/parsers/parser_core.hpp \
-    ../wiki-markup/components/parsers/parsing_results.hpp \
-    ../wiki-markup/components/parsers/phoenix_includes.hpp \
     ../wiki-markup/components/parsers/properties.hpp \
-    ../wiki-markup/components/parsers/qi_includes.hpp \
-    ../wiki-markup/components/parsers/space.hpp \
     ../wiki-markup/components/parsers/table.hpp \
-    ../wiki-markup/components/parsers/unescaped_string.hpp \
     ../wiki-markup/components/parsers/url.hpp \
     ../wiki-markup/components/post_processors/link.hpp \
     ../wiki-markup/components/post_processors/list.hpp \
@@ -186,8 +178,6 @@ HEADERS  += \
     ../wiki-markup/parser/parser_context.hpp \
     ../wiki-markup/parser/token.hpp \
     ../wiki-markup/parser/token_classification.hpp \
-    ../wiki-markup/util/meta/apply.hpp \
-    ../wiki-markup/util/meta/pop_front.hpp \
     ../wiki-markup/configuration.hpp \
     ../wiki-markup/page.hpp \
     ui_components/text.hpp \
@@ -196,7 +186,36 @@ HEADERS  += \
     component_builder.hpp \
     style_sheet_preprocessor.hpp \
     ui_components/table.hpp \
-    page_container.hpp
+    page_container.hpp \
+    ../wretched-css/parser/color.hpp \
+    ../wretched-css/parser/comment.hpp \
+    ../wretched-css/parser/numerical.hpp \
+    ../wretched-css/parser/property.hpp \
+    ../wretched-css/parser/rule_set.hpp \
+    ../wretched-css/parser/url.hpp \
+    ../wretched-css/rule_set/rule/property/value/color.hpp \
+    ../wretched-css/rule_set/rule/property/value/dimensionless.hpp \
+    ../wretched-css/rule_set/rule/property/value/keyword.hpp \
+    ../wretched-css/rule_set/rule/property/value/numerical.hpp \
+    ../wretched-css/rule_set/rule/property/value/point.hpp \
+    ../wretched-css/rule_set/rule/property/value/string.hpp \
+    ../wretched-css/rule_set/rule/property/value/url.hpp \
+    ../wretched-css/rule_set/rule/property/known_properties.hpp \
+    ../wretched-css/rule_set/rule/property/property.hpp \
+    ../wretched-css/rule_set/rule/property/value.hpp \
+    ../wretched-css/rule_set/rule/property/valueifier.hpp \
+    ../wretched-css/rule_set/rule/rule.hpp \
+    ../wretched-css/rule_set/rule/selector.hpp \
+    ../wretched-css/rule_set/rule_set.hpp \
+    ../twisted-spirit/core/confix.hpp \
+    ../twisted-spirit/core/fusion_includes.hpp \
+    ../twisted-spirit/core/parse.hpp \
+    ../twisted-spirit/core/parser_core.hpp \
+    ../twisted-spirit/core/parsing_results.hpp \
+    ../twisted-spirit/core/phoenix_includes.hpp \
+    ../twisted-spirit/core/qi_includes.hpp \
+    ../twisted-spirit/grammars/unescaped_string.hpp \
+    ../twisted-spirit/rules/space.hpp
 
 FORMS    += editor.ui
 
