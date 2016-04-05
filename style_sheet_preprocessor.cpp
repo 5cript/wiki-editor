@@ -7,6 +7,7 @@
 #include <boost/wave/cpplexer/cpp_lex_token.hpp>    // token class
 #include <boost/wave/cpplexer/cpp_lex_iterator.hpp> // lexer class
 
+#include <string>
 #include <sstream>
 #include <iomanip>
 
@@ -21,12 +22,10 @@ std::string preprocessStyleSheet(std::string styleSheet)
 
     context_type ctx(styleSheet.begin(), styleSheet.end(), "stylesheet.qss");
 
-    using namespace std::literals;
-
     std::stringstream version;
     version << "0x" << std::hex << std::setw(6) << QT_VERSION;
 
-    ctx.add_macro_definition("QT_VERSION="s + version.str(), true);
+    ctx.add_macro_definition(std::string("QT_VERSION=") + version.str(), true);
     ctx.add_macro_definition("STYLE_PROCESSOR_VERSION=0x0000", true);
 
     context_type::iterator_type first = ctx.begin();
