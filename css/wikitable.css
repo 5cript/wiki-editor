@@ -1,0 +1,11 @@
+.wikitable.headers {
+	font-weight: normal;
+	text-align: left;
+	background-color: #F2F2F2;
+	font-weight: bold;
+}
+
+.wikitable {
+	text-align: left;
+	font-weight: normal;
+}
