@@ -21,8 +21,11 @@ public:
     Qt::ItemFlags flags(const QModelIndex & index) const;
 
     void setTable(WikiMarkup::Components::Table const& table);
+    void setTableStyle(std::string const& sheet);
+
 private:
     WikiMarkup::Components::Table table_;
+    std::string tableStyle_;
 };
 
 #endif // TABLE_HPP

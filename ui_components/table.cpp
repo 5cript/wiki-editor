@@ -85,3 +85,8 @@ void WikiTableModel::setTable(WikiMarkup::Components::Table const& table)
     table_ = table;
 }
 //-----------------------------------------------------------------------------------
+void WikiTableModel::setTableStyle(std::string const& sheet)
+{
+    tableStyle_ = sheet;
+}
+//-----------------------------------------------------------------------------------

@@ -2,4 +2,7 @@
     <qresource prefix="/styles">
         <file alias="default.qss">styles/default.qss</file>
     </qresource>
+    <qresource prefix="/css">
+        <file alias="wikitable.css">css/wikitable.css</file>
+    </qresource>
 </RCC>
