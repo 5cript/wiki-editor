@@ -63,27 +63,6 @@ void PageBuilder::addTable(QLayout* parent, WikiMarkup::Components::Table const*
 {
     auto* table = new TableView;
 
-    std::string style = "";
-
-    auto maybeClass = component->attributes.find("class");
-    if (maybeClass != std::end(component->attributes))
-    {
-        QFile file(":/css/wikitable.css");
-        file.open(QFile::ReadOnly);
-        style += QString(QLatin1String(file.readAll())).toStdString();
-        style.push_back('\n');
-    }
-
-    auto maybeStyle = component->attributes.find("style");
-    if (maybeStyle != std::end(component->attributes))
-    {
-        style += "#table {\n\t";
-        style += maybeStyle->second;
-        style += "\n}\n";
-    }
-
-    qDebug() << style.c_str();
-
     table->setObjectName("TableView");
     table->setModel(&container_.createNewTable(*component));
     table->horizontalHeader()->hide();

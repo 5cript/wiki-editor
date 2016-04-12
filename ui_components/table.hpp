@@ -4,6 +4,7 @@
 #include <QTableView>
 
 #include "wiki-markup/components/table.hpp"
+#include "wretched-css/rule_set/rule_set.hpp"
 
 using TableView = QTableView;
 
@@ -21,9 +22,10 @@ public:
     Qt::ItemFlags flags(const QModelIndex & index) const;
 
     void setTable(WikiMarkup::Components::Table const& table);
-    void setTableStyle(std::string const& sheet);
+    void parseStyle();
 
 private:
+    WretchedCss::RuleSet tableWideStyle_;
     WikiMarkup::Components::Table table_;
     std::string tableStyle_;
 };

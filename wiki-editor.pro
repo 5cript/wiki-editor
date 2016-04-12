@@ -5,13 +5,12 @@
 #-------------------------------------------------
 
 QT       += core gui
-QMAKE_CXXFLAGS += -std=c++14
-CONFIG += static object_parallel_to_source
+CONFIG += static object_parallel_to_source c++14
 
-INCLUDEPATH += $$PWD/../wiki-markup/bin/Release
-DEPENDPATH += $$PWD/../wiki-markup/bin/Release
+INCLUDEPATH += $$PWD/../wiki-markup/bin/Release $$PWD/../wiki-markup/bin/Debug
+DEPENDPATH += $$PWD/../wiki-markup/bin/Release $$PWD/../wiki-markup/bin/Debug
 INCLUDEPATH += ../../wiki-project
-LIBS += -lboost_system-mt -lboost_filesystem-mt -lboost_thread-mt -lboost_wave-mt -lws2_32 -lssl -lcrypto
+LIBS += -lboost_system-mt -lboost_filesystem-mt -lboost_thread-mt -lboost_wave-mt -lws2_32 -lssl -lcrypto -lwiki-markup
 
 release {
     QMAKE_LFLAGS += -static -static-libgcc -static-libstdc++
@@ -51,7 +50,17 @@ SOURCES += main.cpp\
     style_sheet_preprocessor.cpp \
     ui_components/table.cpp \
     page_container.cpp \
-    ../twisted-spirit/rules/space.cpp
+    ../twisted-spirit/rules/space.cpp \
+    ../wretched-css/parser/color.cpp \
+    ../wretched-css/parser/property.cpp \
+    ../wretched-css/rule_set/rule/property/value/color.cpp \
+    ../wretched-css/rule_set/rule/property/value/dimensionless.cpp \
+    ../wretched-css/rule_set/rule/property/value/numerical.cpp \
+    ../wretched-css/rule_set/rule/property/value/point.cpp \
+    ../wretched-css/rule_set/rule/property/value/string.cpp \
+    ../wretched-css/rule_set/rule/property/value/url.cpp \
+    ../wretched-css/rule_set/rule/rule.cpp \
+    ../wretched-css/rule_set/rule_set.cpp
 
 HEADERS  += \
     ../wiki-client/rest/client.hpp \
